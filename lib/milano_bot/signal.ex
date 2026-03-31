@@ -1,5 +1,5 @@
 defmodule MilanoBot.Signal do
-  @spec send(String.t()) :: any()
+  @spec send(String.t()) :: Req.Response.t() | Exception.t()
   def send(message) do
     "#{signal_config(:api_url)}/v2/send"
     |> Req.post(
@@ -9,7 +9,6 @@ defmodule MilanoBot.Signal do
         message: message
       }
     )
-    |> IO.inspect()
     |> case do
       {:ok, resp} -> resp
       {:error, error} -> error
